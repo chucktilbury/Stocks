@@ -4,6 +4,7 @@ These notes are not formal design docs. They are random notes to track the devel
 
 ## ToDo
 
+* Properly fork the repos for the libraries that we are using. Wire them up so we can actually use them.
 * Develop a widget that can do candlestick and line graphs on the same canvas. Test it. (requires the matplotlib library)
   * Allow different length data sets with horizontal scroll bars.
 * Build the user interface with stubbed out menus. UI will use the notebooks and SQL interface from the Accounting app.
@@ -17,9 +18,22 @@ These notes are not formal design docs. They are random notes to track the devel
 
 ## Done
 
-* This file. :) 
+* This file. :)
 
 ## Questions
 
 * Why does bacon taste so good?
+
+## Links
+https://www.geeksforgeeks.org/multithreaded-download-of-yahoo-stock-history-with-python-yfinance/
+https://pypi.org/project/yfinance/
+https://algotrading101.com/learn/yfinance-guide/
+https://www.investopedia.com/
+https://data.nasdaq.com/tools/python
+https://site.financialmodelingprep.com/developer/docs/
+https://www.alphavantage.co/
+https://developer.morningstar.com/
+https://eodhistoricaldata.com/
+https://marketstack.com/product
+
 

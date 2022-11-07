@@ -1,7 +1,7 @@
 # python_candlestick_chart.py
 
 import matplotlib.pyplot as plt
-from mplfinance import candlestick_ohlc
+from mplfinance import candlestick_olhc
 import pandas as pd
 import matplotlib.dates as mpl_dates
 

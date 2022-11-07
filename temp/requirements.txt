@@ -1,0 +1,10 @@
+numpy
+pandas
+pandas-finance
+empyrical
+pandas-datareader
+mplfinance
+matplotlib
+sphinx
+sphinx-rtd-theme
+yfinance

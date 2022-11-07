@@ -2,7 +2,7 @@ import pandas as pd
 import mplfinance as mpf
 
 # Load data file.
-df = pd.read_csv('SP500_NOV2019_Hist.csv', index_col=0, parse_dates=True)
+df = pd.read_csv('../test-small.csv', index_col=0, parse_dates=True)
 
 # Plot candlestick.
 # Add volume.
@@ -15,3 +15,4 @@ mpf.plot(df, type='candle', style='charles',
             volume=True,
             mav=(3,6,9),
             savefig='test-mplfiance.png')
+mpf.show()
