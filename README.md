@@ -1,6 +1,6 @@
 # Stocks
 
-This is a simple stock security tracker. I am working on it to help me understand the analysis associated with trading stocks, since I have no training and no clue how such analysis actually works. This is not intended to be guidance for trading stocks, or anything else, and will almost certainly lead to wrong choices if someone tries to use it for some purpose or other. 
+This is a simple stock security tracker. I am working on it to help me understand the analysis associated with trading stocks, since I have no training and no clue how such analysis actually works. This is not intended to be guidance for trading stocks, or anything else, and will almost certainly lead to wrong choices if someone tries to use it for some purpose or other. This project could be useful for learning python and related things.
 
 This application will be a simple stock tracker that is able to do past analysis on the history of specific stocks. Several types of analysis is planned such as:
 * Relative Strength Indicator (RSI)
