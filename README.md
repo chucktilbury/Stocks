@@ -14,7 +14,7 @@ After that is working sufficiently well, then implement the logic needed to sele
 
 One of my chief resources is [here](https://www.investopedia.com/). This site has a lot of information for abject noobs like me. Most of the math that is implemented in this application was gotten from here.
 
-This program will be implemented using Python3, Tkinter, and SQlite. It also requires pandas, matplotlib, and maybe others. There should be no other dependencies and most modern operating environemnts should be supported. There is no plan to directly support iPad or Android. 
+This program will be implemented using Python3, Tkinter, and SQlite. It also requires pandas, matplotlib, and maybe others. Also, pyinstaller package is required to build the app. There should be no other dependencies and most modern operating environemnts should be supported. There is no plan to directly support iPad or Android. 
 
 The end game is to simulate one or more investments and measure the strategies for result.
 
