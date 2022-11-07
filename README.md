@@ -7,7 +7,7 @@ This application will be a simple stock tracker that is able to do past analysis
 * Fibonacci
 * Bollinger
 * Breath Thrust Indicator (BTI)
-* SMA and EMA amd others
+* SMA and EMA and others
 * Other indicator generators.
 
 After that is working sufficiently well, then implement the logic needed to select a set of indicators and track how it would have done in the past if we had used it. 
