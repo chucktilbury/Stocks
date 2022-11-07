@@ -1,0 +1,49 @@
+
+Links to data.
+
+Moving averages:
+https://www.fidelity.com/viewpoints/active-investor/moving-averages
+https://www.investopedia.com/terms/m/macd.asp
+https://www.investopedia.com/terms/e/ema.asp
+EMA = Closing price x multiplier + EMA (previous day) x (1-multiplier)
+https://www.investopedia.com/ask/answers/122314/what-exponential-moving-average-ema-formula-and-how-ema-calculated.asp
+https://www.investopedia.com/terms/m/movingaverageribbon.asp
+https://www.investopedia.com/terms/g/guppy-multiple-moving-average.asp
+
+Candlestick explanations
+https://www.investopedia.com/trading/candlestick-charting-what-is-it/
+
+Definitions
+https://www.investopedia.com/terms/d/doji.asp
+https://www.investopedia.com/terms/s/spinning-top.asp
+https://www.investopedia.com/terms/w/whipsaw.asp
+https://www.investopedia.com/terms/r/rsi.asp
+
+yfinance examples:
+https://algotrading101.com/learn/yfinance-guide/
+https://pypi.org/project/yfinance/
+
+yfinance alternatives
+** https://site.financialmodelingprep.com/developer/docs/
+** https://data.nasdaq.com/tools/python
+** https://www.alphavantage.co/
+https://developer.morningstar.com/
+https://eodhistoricaldata.com/
+https://marketstack.com/product
+
+Technical analysis home page.
+https://www.investopedia.com/technical-analysis-4689657
+
+yfinance links:
+https://algotrading101.com/learn/yahoo-finance-api-guide/
+https://pypi.org/project/yfinance/
+
+ccxt links
+https://github.com/ccxt/ccxt
+
+Python graphics
+https://doc.qt.io/qtforpython/overviews/qtcharts-candlestickchart-example.html
+
+NASDAQ key = cxhEXE5y98mk8isu5QyH
+
+https://algotrading101.com/learn/google-finance-api-guide/
