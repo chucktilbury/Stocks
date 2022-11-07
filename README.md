@@ -16,4 +16,6 @@ One of my chief resources is [here](https://www.investopedia.com/). This site ha
 
 This program will be implemented using Python3, Tkinter, and SQlite. There should be no other dependencies and most modern operating environemnts should be supported. There is no plan to directly support iPad or Android. 
 
+The end game is to simulate one or more investments and measure the strategies for result.
+
 Questions and bugs can be submitted through github.
