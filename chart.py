@@ -12,10 +12,21 @@ import pandas as pd
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-import matplotlib.dates as mdates
-import matplotlib.pyplot as plt
-from matplotlib.dates import MONDAY, DateFormatter, DayLocator, WeekdayLocator
+# https://matplotlib.org/stable/api/matplotlib_configuration_api.html
+import matplotlib as mpl
+mpl.use('TkAgg')
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+
+import matplotlib.animation as animation
+from matplotlib import style
+
 from mplfinance.original_flavor import candlestick_ohlc
+
+import matplotlib.dates as mdates
+#import matplotlib.pyplot as plt
+#from matplotlib.dates import MONDAY, DateFormatter, DayLocator, WeekdayLocator
+#from mplfinance.original_flavor import candlestick_ohlc
 
 import datetime
 import tkinter as tk
@@ -25,7 +36,7 @@ class Chart(tk.Frame):
     Create a chart to display within a notebook frame.
     '''
 
-    def __init__(self, owner, name, fname, start_date, end_date, **kw):
+    def __init__(self, owner, fname, start_date, end_date, **kw):
 
         if 'panel_width' in kw:
             self.panel_width = kw['panel_width']
@@ -45,7 +56,8 @@ class Chart(tk.Frame):
         self. start_date = start_date
         self.end_date = end_date
 
-        self.total_height = self.panel_height - 70
+        # subtract the height of the tab bar
+        self.total_height = self.panel_height-105
         self.info_frame_width = 250
         self.btn_frame_width = 15
         self.ctl_frame_width = \
@@ -69,23 +81,57 @@ class Chart(tk.Frame):
         self._add_button("Setup", self._setup_btn_cb)
 
         # set up the content frame
-        self.ctl_frame = tk.LabelFrame(self, text=name)
+        self.ctl_frame = tk.LabelFrame(self)#, text=name)
         self.ctl_frame.config(width=self.ctl_frame_width)
-        self.ctl_frame.config(height=self.total_height+17)
+        self.ctl_frame.config(height=self.total_height)
         self.ctl_frame.grid(row=0, column=1, sticky='nw')
 
-        self.info_frame = tk.LabelFrame(self, text='Info')
+        self.info_frame = tk.LabelFrame(self)#, text='Info')
         self.info_frame.config(width=self.info_frame_width)
         self.info_frame.config(height=self.total_height)
         self.info_frame.grid(row=0, column=2, sticky='nw', padx=7)
         self.info_data_frame = tk.Frame(self.info_frame)
-        self.info_data_frame.config(height=self.total_height-35)
+        self.info_data_frame.config(height=self.total_height)
         self.info_data_frame.grid(column=0, row=0)
         btn = tk.Button(self.info_frame, text="Refresh", width=self.btn_width, command=self._refresh_btn_cb)
         btn.grid(column=0, row=1)
 
-
         self.grid() # display the frame
+        self.update_chart("temp/test.csv")
+
+    def update_chart(self, chart):
+        LARGE_FONT= ("Arial", 12)
+        style.use("classic")
+        # use this for configurations
+        # print(style.available)
+
+        data = pd.read_csv(chart)
+        ohlc = data.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
+        ohlc['Date'] = pd.to_datetime(ohlc['Date'])
+        ohlc['Date'] = ohlc['Date'].apply(mdates.date2num)
+        ohlc = ohlc.astype(float)
+
+        figure = Figure(figsize=(9.25,5.85), dpi=100)
+        figure.suptitle('Daily Candlestick Chart of NIFTY50')
+        axis = figure.add_subplot(xlabel="Date", ylabel="Price")
+
+        canvas = FigureCanvasTkAgg(figure, self.ctl_frame)
+        canvas.get_tk_widget().grid(row=0, column=0)
+
+        candlestick_ohlc(axis, ohlc.values, width=0.6, colorup='green', colordown='red', alpha=0.8)
+
+        date_format = mdates.DateFormatter('%m-%d-%Y')
+        axis.xaxis.set_major_formatter(date_format)
+        figure.autofmt_xdate()
+
+        #figure.tight_layout()
+        canvas.draw()
+
+        toolbar = NavigationToolbar2Tk(canvas, self.ctl_frame, pack_toolbar=False)
+        toolbar.update()
+        toolbar.grid(row=1, column=0)
+
+
 
     def _add_button(self, name, callback, **kw):
         widget = tk.Button(self.btn_frame, text=name, width=self.btn_width, command=callback, **kw)
@@ -104,3 +150,46 @@ class Chart(tk.Frame):
 
     def _refresh_btn_cb(self):
         print("refresh callback")
+
+
+'''
+        mondays = WeekdayLocator(MONDAY)        # major ticks on the mondays
+        alldays = DayLocator()              # minor ticks on the days
+        weekFormatter = DateFormatter('%b %d')  # e.g., Jan 12
+        dayFormatter = DateFormatter('%d')      # e.g., 12
+
+        quotes = pd.read_csv(self.fname,
+                            index_col=0,
+                            parse_dates=True,
+                            infer_datetime_format=True)
+
+        # select desired range of dates
+        quotes = quotes[(quotes.index >=
+                        self.start_date) & (quotes.index <= self.end_date)]
+
+        fig, ax = plt.subplots()
+        fig.subplots_adjust(bottom=0.2)
+        ax.xaxis.set_major_locator(mondays)
+        ax.xaxis.set_minor_locator(alldays)
+        ax.xaxis.set_major_formatter(weekFormatter)
+        # ax.xaxis.set_minor_formatter(dayFormatter)
+
+        # plot_day_summary(ax, quotes, ticksize=3)
+        candlestick_ohlc(ax, zip(mdates.date2num(quotes.index.to_pydatetime()),
+                        quotes['Open'], quotes['High'],
+                        quotes['Low'], quotes['Close']),
+                        width=0.6)
+
+        ax.xaxis_date()
+        ax.autoscale_view()
+        canvas = FigureCanvasTkAgg(fig, self)
+        canvas.get_tk_widget().grid(row=0, column=0)
+
+        toolbar = NavigationToolbar2Tk(canvas, self)
+        toolbar.update()
+        canvas._tkcanvas.grid(row=1, column=0)
+
+        #plt.setp(plt.gca().get_xticklabels(),
+                    #rotation=45, horizontalalignment='right')
+
+'''

@@ -23,7 +23,7 @@ class MainFrame(object):
         # Add the other use interface stuff here.
         self.notebook = Notebook(self.master, ["Tab1", "Tab2", "Tab3"])
         self.notebook.show_tab(0)
-        Chart(self.notebook, "MSFT", "test.csv", "2021-01-04", "2021-02-26",
+        Chart(self.notebook, "test.csv", "2021-01-04", "2021-02-26",
                 panel_height=self.win_height, panel_width=self.win_width)
 
     def run(self):
