@@ -51,7 +51,7 @@ class Chart(tk.Frame):
         self._add_button("btn2", self._btn1_cb)
         self._add_button("btn3", self._btn1_cb)
 
-        self.grid()
+        self.grid() # display the frame
 
     def _add_button(self, name, callback, **kw):
         widget = tk.Button(self.btn_frame, text=name, width=self.btn_width, command=callback, **kw)
