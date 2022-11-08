@@ -24,6 +24,10 @@ These notes are not formal design docs. They are random notes to track the devel
 
 * Why does bacon taste so good?
 
+## Observations
+
+* yfinance can get any symbol in the nasdaq or the other file.
+
 ## Links
 https://www.geeksforgeeks.org/multithreaded-download-of-yahoo-stock-history-with-python-yfinance/
 https://pypi.org/project/yfinance/
@@ -35,5 +39,6 @@ https://www.alphavantage.co/
 https://developer.morningstar.com/
 https://eodhistoricaldata.com/
 https://marketstack.com/product
-
+https://rapidapi.com/hub
+https://docs.data.nasdaq.com/
 

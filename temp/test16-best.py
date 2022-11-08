@@ -5,15 +5,18 @@
 
 import yfinance as yf
 import pandas as pd
-msft = yf.Ticker("MSFT")
+symbol = "DFIC"
+ticker = yf.Ticker(symbol)
+
 # get stock info
-msft.info
+ticker.info
+print(ticker.info)
 
 # get historical market data
-hist = msft.history(period="max")
+hist = ticker.history(period="max", interval="1m")
 print(hist)
 df = pd.DataFrame(hist)
-df.to_csv('MSFT-max.csv')
+df.to_csv(symbol+'-max-1m.csv')
 
 '''
 # show actions (dividends, splits)
