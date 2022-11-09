@@ -1,7 +1,7 @@
 
 import tkinter as tk
 
-#just used to diaplay messages on screen
+#just used to display messages on screen
 from tkinter import messagebox
 
 class MainMenu(object):
