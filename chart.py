@@ -30,6 +30,7 @@ import matplotlib.dates as mdates
 
 import datetime
 import tkinter as tk
+import pprint
 
 class Chart(tk.Frame):
     '''
@@ -97,20 +98,26 @@ class Chart(tk.Frame):
         btn.grid(column=0, row=1)
 
         self.grid() # display the frame
-        self.update_chart("temp/test.csv")
+        self.update_chart("temp/test.csv", start_date, end_date)
 
-    def update_chart(self, chart):
+    # TODO: split out the logic that actually changes the graph and put it in
+    # a different function.
+    def update_chart(self, chart, start, end):
         LARGE_FONT= ("Arial", 12)
         style.use("classic")
         # use this for configurations
         # print(style.available)
 
         data = pd.read_csv(chart)
-        ohlc = data.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
+        # isolate the data from the table
+        data_range = data.iloc[20:50]
+
+        ohlc = data_range.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
         ohlc['Date'] = pd.to_datetime(ohlc['Date'])
         ohlc['Date'] = ohlc['Date'].apply(mdates.date2num)
         ohlc = ohlc.astype(float)
 
+        # size of the figure is in inches.
         figure = Figure(figsize=(9.25,5.85), dpi=100)
         figure.suptitle('Daily Candlestick Chart of NIFTY50')
         axis = figure.add_subplot(xlabel="Date", ylabel="Price")
@@ -118,13 +125,13 @@ class Chart(tk.Frame):
         canvas = FigureCanvasTkAgg(figure, self.ctl_frame)
         canvas.get_tk_widget().grid(row=0, column=0)
 
-        candlestick_ohlc(axis, ohlc.values, width=0.6, colorup='green', colordown='red', alpha=0.8)
+        candlestick_ohlc(axis, ohlc.values, width=0.6,
+                         colorup='green', colordown='red', alpha=0.8)
 
         date_format = mdates.DateFormatter('%m-%d-%Y')
         axis.xaxis.set_major_formatter(date_format)
         figure.autofmt_xdate()
 
-        #figure.tight_layout()
         canvas.draw()
 
         toolbar = NavigationToolbar2Tk(canvas, self.ctl_frame, pack_toolbar=False)
