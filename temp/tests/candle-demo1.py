@@ -13,6 +13,6 @@ mpf.plot(df, type='candle', style='charles',
             ylabel='Price ($)',
             ylabel_lower='Shares \nTraded',
             volume=True,
-            mav=(3,6,9),
-            savefig='test-mplfiance.png')
+            mav=(3,6,9))
+            #savefig='test-mplfiance.png')
 mpf.show()

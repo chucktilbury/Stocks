@@ -1,4 +1,4 @@
-from mplfinance import candlestick3_ohlc
+from mplfinance.original_flavor import candlestick_ohlc
 from matplotlib import pyplot as plt
 from datetime import datetime as dt
 import numpy as np
@@ -17,7 +17,7 @@ def candle_plot(df_ohlc, numb_days, symb, descr, candle_width):
 
 
     # run the candle plot
-    candlestick2_ohlc(ax, df_latest.open, df_latest.high, df_latest.low, df_latest.close,
+    candlestick_ohlc(ax, df_latest.open, df_latest.high, df_latest.low, df_latest.close,
                         width=.9, colorup='g');
 
 
@@ -67,3 +67,5 @@ def candle_plot(df_ohlc, numb_days, symb, descr, candle_width):
         transform=ax.transAxes, fontsize=12, color='dimgrey')
     ax.text(1, -0.02, maxDate, horizontalalignment='right', verticalalignment='top',
         transform=ax.transAxes, fontsize=12, color='dimgrey')
+
+candle_plot()
