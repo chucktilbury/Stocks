@@ -1,3 +1,10 @@
+'''
+Resources:  
+https://www.statology.org/matplotlib-python-candlestick-chart/
+https://blog.quantinsti.com/historical-market-data-python-api/
+
+'''
+
 # Import yfinance and matplotlib and pandas
 import yfinance as yf  
 import matplotlib.pyplot as plt
