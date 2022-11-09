@@ -37,7 +37,7 @@ class Chart(tk.Frame):
     Create a chart to display within a notebook frame.
     '''
 
-    def __init__(self, owner, fname, start_date, end_date, **kw):
+    def __init__(self, owner, **kw):
 
         if 'panel_width' in kw:
             self.panel_width = kw['panel_width']
@@ -53,9 +53,9 @@ class Chart(tk.Frame):
 
         super().__init__(owner, **kw)
         self.owner = owner
-        self.fname = fname
-        self. start_date = start_date
-        self.end_date = end_date
+        #self.fname = fname
+        #self.start_date = start_date
+        #self.end_date = end_date
 
         # subtract the height of the tab bar
         self.total_height = self.panel_height-105
@@ -98,11 +98,10 @@ class Chart(tk.Frame):
         btn.grid(column=0, row=1)
 
         self.grid() # display the frame
-        self.update_chart("temp/test.csv", start_date, end_date)
 
     # TODO: split out the logic that actually changes the graph and put it in
     # a different function.
-    def update_chart(self, chart, start, end):
+    def create_chart(self, chart, name):
         LARGE_FONT= ("Arial", 12)
         style.use("classic")
         # use this for configurations
@@ -119,7 +118,7 @@ class Chart(tk.Frame):
 
         # size of the figure is in inches.
         figure = Figure(figsize=(9.25,5.85), dpi=100)
-        figure.suptitle('Daily Candlestick Chart of NIFTY50')
+        figure.suptitle(name)
         axis = figure.add_subplot(xlabel="Date", ylabel="Price")
 
         canvas = FigureCanvasTkAgg(figure, self.ctl_frame)
@@ -138,7 +137,8 @@ class Chart(tk.Frame):
         toolbar.update()
         toolbar.grid(row=1, column=0)
 
-
+    def update_char(self):
+        pass
 
     def _add_button(self, name, callback, **kw):
         widget = tk.Button(self.btn_frame, text=name, width=self.btn_width, command=callback, **kw)

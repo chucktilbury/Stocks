@@ -31,12 +31,12 @@ class Notebook(tk.Frame):
 
         self.grid()
 
-    def add_tab(self, name, show_cb=None, hide_cb=None):
+    def add_tab(self, name, frame, show_cb=None, hide_cb=None):
         '''
         Add a tab to the notebook with the specified name. Creates a frame for the
         tab and places it in the list, but does not display it.
         '''
-        frame = tk.Frame(self)
+        #frame = tk.Frame(self)
         button = tk.Button(self.btn_frame, text=name, width=self.btn_width, relief='raised',
                             command=lambda idx=self.frame_index: self.show_tab(idx) )
         button.grid(row=0, column=self.frame_index, sticky='w')
@@ -46,6 +46,7 @@ class Notebook(tk.Frame):
                                 'button':button,
                                 'show_cb':show_cb,
                                 'hide_cb':hide_cb})
+        self.frame_list[self.frame_index]['frame'] = frame
         self.frame_index += 1
 
     def show_tab(self, index):
