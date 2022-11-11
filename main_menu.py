@@ -63,9 +63,7 @@ class MainMenu(object):
     def _confirm_exit(self):
         if messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
             self._do_exit()
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    
+
     def _file_new(self):
         messagebox.showinfo("showinfo","you clicked file new")
 
@@ -124,7 +122,3 @@ Other indicator generators.
 
     def _help_help(self):
         messagebox.showinfo("showinfo","you clicked help help")
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
