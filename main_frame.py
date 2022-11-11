@@ -28,17 +28,17 @@ class MainFrame(object):
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
         self.notebook.add_tab('CRHC', chart)
-        chart.create_chart('temp/CRHC-max.csv', 'CRHC')
+        chart.create_chart('CRHC-max.csv', 'CRHC')
 
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
         self.notebook.add_tab('DFIC', chart)
-        chart.create_chart('temp/DFIC-max.csv', 'DFIC')
+        chart.create_chart('DFIC-max.csv', 'DFIC')
 
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
         self.notebook.add_tab('MSFT', chart)
-        chart.create_chart('temp/MSFT-max.csv', 'MSFT')
+        chart.create_chart('MSFT-max.csv', 'MSFT')
         self.notebook.show_tab(0)
 
     def run(self):
