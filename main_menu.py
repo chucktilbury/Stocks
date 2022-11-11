@@ -1,5 +1,6 @@
 
 import tkinter as tk
+from configuration import Config
 
 #just used to display messages on screen
 from tkinter import messagebox
@@ -10,6 +11,7 @@ class MainMenu(object):
         # build the menu here
         #print("building the main menu")
         self.master = master
+        self.config = Config.get_config()
 
         menubar = tk.Menu(self.master)
 
@@ -53,7 +55,7 @@ class MainMenu(object):
 
     def _do_exit(self):
         self.master.destroy()
-    
+
     #Pop up a message on the screen
     def _displayMsg(self):
         messagebox.showinfo("showinfo","you clicked a menu")
@@ -61,6 +63,8 @@ class MainMenu(object):
     def _confirm_exit(self):
         if messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
             self._do_exit()
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
     def _file_new(self):
         messagebox.showinfo("showinfo","you clicked file new")
@@ -120,3 +124,7 @@ Other indicator generators.
 
     def _help_help(self):
         messagebox.showinfo("showinfo","you clicked help help")
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes

@@ -3,6 +3,7 @@ import tkinter as tk
 from main_menu import MainMenu
 from notebook import Notebook
 from chart import Chart
+from configuration import Config
 
 class MainFrame(object):
 
@@ -18,6 +19,7 @@ class MainFrame(object):
         master.menu_bar = MainMenu(master)
         master.geometry("{w}x{h}".format(w=self.win_width, h=self.win_height))
         self.init_ui()
+        self.config = Config.get_config()
 
     def init_ui(self):
         # Add the other use interface stuff here.

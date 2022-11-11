@@ -31,6 +31,7 @@ import matplotlib.dates as mdates
 import datetime
 import tkinter as tk
 import pprint
+from configuration import Config
 
 class Chart(tk.Frame):
     '''
@@ -51,6 +52,7 @@ class Chart(tk.Frame):
         else:
             self.panel_height = 720
 
+        self.config = Config.get_config()
         super().__init__(owner, **kw)
         self.owner = owner
         #self.fname = fname
