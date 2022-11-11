@@ -1,6 +1,5 @@
 
 import tkinter as tk
-from configuration import Config
 
 #just used to display messages on screen
 from tkinter import messagebox
@@ -11,7 +10,6 @@ class MainMenu(object):
         # build the menu here
         #print("building the main menu")
         self.master = master
-        self.config = Config.get_config()
 
         menubar = tk.Menu(self.master)
 

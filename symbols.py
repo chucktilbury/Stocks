@@ -19,11 +19,3 @@ class Symbol(object):
     def name(self):
         return self.symbol.info['symbol']
 
-
-
-if __name__ == "__main__":
-
-    sym = Symbol("MSFT")
-    save(sym, "test-pickle.pkl")
-    obj = load("test-pickle.pkl")
-    print(obj.name())
