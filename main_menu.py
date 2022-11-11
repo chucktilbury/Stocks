@@ -53,7 +53,7 @@ class MainMenu(object):
 
     def _do_exit(self):
         self.master.destroy()
-    
+
     #Pop up a message on the screen
     def _displayMsg(self):
         messagebox.showinfo("showinfo","you clicked a menu")
@@ -61,7 +61,7 @@ class MainMenu(object):
     def _confirm_exit(self):
         if messagebox.askokcancel('Quit', 'Are you sure you want to quit?'):
             self._do_exit()
-    
+
     def _file_new(self):
         messagebox.showinfo("showinfo","you clicked file new")
 

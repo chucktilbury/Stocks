@@ -47,6 +47,7 @@ class Notebook(tk.Frame):
                                 'show_cb':show_cb,
                                 'hide_cb':hide_cb})
         self.frame_list[self.frame_index]['frame'] = frame
+        self.show_tab(self.frame_index)
         self.frame_index += 1
 
     def show_tab(self, index):
