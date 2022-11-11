@@ -18,14 +18,14 @@ class Config(object):
         def add_symbol(self, name, sym):
             self.sym_list[name] = sym
 
-        def get_symbol_list(self):
-            return self.sym_list
-
         def get_symbol(self, name):
             if name in self.sym_list:
                 return self.sym_list[name]
             else:
                 raise Exception("Symbol '%s' is not found in the configuration"%name)
+
+        def get_symbol_list(self):
+            return self.sym_list
 
     __instance = None
 
@@ -50,7 +50,10 @@ class Config(object):
         self._save_config(self._find_config())
 
     def _find_config(self):
-        fname = os.path.join(os.environ['HOME'], 'stocks_config.data')
+        if os.name == 'nt':
+            fname = os.path.join(os.environ['UserProfile'], 'stocks_config.data')
+        else:
+            fname = os.path.join(os.environ['HOME'], 'stocks_config.data')
         if not os.path.exists(fname):
             self._create_config(fname)
         return fname
@@ -66,4 +69,17 @@ class Config(object):
     def _create_config(self, fname):
         self.config = Config._configuration()
         self._save_config(fname)
+
+    # below here, add the api getter and setter for configuration items.
+    def add_symbol(self, name, symbol):
+        '''
+        Store a symbol object to the configuration
+        '''
+        self.config.add_symbol(name, symbol)
+
+    def get_symbol(self, name):
+        '''
+        Return a symbol object from the configuration.
+        '''
+        return self.config.get_symbol(name)
 

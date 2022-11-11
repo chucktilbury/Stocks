@@ -1,5 +1,0 @@
-pandas
-requests-cache
-pandas-datareader>=0.7.0
-empyrical
-
