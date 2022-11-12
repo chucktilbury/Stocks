@@ -44,19 +44,15 @@ class Config(object):
     __instance = None
 
     def __init__(self):
-        print(">>>>>> create config constructor")
         if Config.__instance is None:
-            print(">>>>> here")
             Config.__instance = self
         else:
             raise Exception("Config class is a singleton. Use get_config() instead of creating an instance.")
-        print(">>>>> here1")
-        self.config = self.load()
+        self.load()
 
     @staticmethod
     def get_config():
         if Config.__instance is None:
-            print(">>>>>> create config")
             Config()
         return Config.__instance
 
@@ -101,14 +97,13 @@ class Config(object):
         return self.config.get_symbol(name)
 
     def set_default_period(self, val):
-        self.config.default_period = val
+        self.config.set_default_period(val)
 
     def default_period(self):
-        print("default period = %s"%self.config.default_period)
-        return self.config.default_period
+        return self.config.get_default_period()
 
     def set_default_interval(self, val):
-        self.config.default_interval = val
+        self.config.set_default_interval(val)
 
     def default_interval(self):
-        return self.config.default_interval
+        return self.config.get_default_interval()

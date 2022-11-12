@@ -33,6 +33,7 @@ import tkinter as tk
 import pprint
 from configuration import Config
 
+
 class Chart(tk.Frame):
     '''
     Create a chart to display within a notebook frame.
@@ -109,14 +110,15 @@ class Chart(tk.Frame):
         # use this for configurations
         # print(style.available)
 
-        data = symbol.data # pd.read_csv(chart)
+        data = symbol.history # pd.read_csv(chart)
         # isolate the data from the table
-        data_range = data.iloc[20:50]
+        ohlc = data.iloc[20:50]
 
-        ohlc = data_range.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
+        ohlc = ohlc.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
         ohlc['Date'] = pd.to_datetime(ohlc['Date'])
         ohlc['Date'] = ohlc['Date'].apply(mdates.date2num)
         ohlc = ohlc.astype(float)
+        #print(ohlc)
 
         # size of the figure is in inches.
         figure = Figure(figsize=(9.25,5.85), dpi=100)

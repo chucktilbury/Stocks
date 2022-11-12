@@ -19,8 +19,8 @@ class MainFrame(object):
         self.win_width = 1200
         master.menu_bar = MainMenu(master)
         master.geometry("{w}x{h}".format(w=self.win_width, h=self.win_height))
-        self.init_ui()
         self.config = Config.get_config()
+        self.init_ui()
 
     def init_ui(self):
         # Add the other use interface stuff here.
