@@ -14,6 +14,8 @@ class Config(object):
         def __init__(self):
             # add config items here, along with getter and setter.
             self.sym_list = {}
+            self.default_period = 'max'
+            self.default_interval = '1m'
 
         def add_symbol(self, name, sym):
             self.sym_list[name] = sym
@@ -27,21 +29,36 @@ class Config(object):
         def get_symbol_list(self):
             return self.sym_list
 
+        def set_default_period(self, val):
+            self.default_period = val
+
+        def get_default_period(self):
+            return self.default_period
+
+        def set_default_interval(self, val):
+            self.default_interval = val
+
+        def get_default_interval(self):
+            return self.default_interval
+
     __instance = None
 
     def __init__(self):
+        print(">>>>>> create config constructor")
         if Config.__instance is None:
+            print(">>>>> here")
             Config.__instance = self
         else:
             raise Exception("Config class is a singleton. Use get_config() instead of creating an instance.")
+        print(">>>>> here1")
         self.config = self.load()
 
     @staticmethod
     def get_config():
-        if Config.__instance == None:
+        if Config.__instance is None:
+            print(">>>>>> create config")
             Config()
-        else:
-            return Config.__instance
+        return Config.__instance
 
     def load(self):
         return self._load_config(self._find_config())
@@ -83,3 +100,15 @@ class Config(object):
         '''
         return self.config.get_symbol(name)
 
+    def set_default_period(self, val):
+        self.config.default_period = val
+
+    def default_period(self):
+        print("default period = %s"%self.config.default_period)
+        return self.config.default_period
+
+    def set_default_interval(self, val):
+        self.config.default_interval = val
+
+    def default_interval(self):
+        return self.config.default_interval

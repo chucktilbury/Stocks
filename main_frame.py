@@ -4,6 +4,7 @@ from main_menu import MainMenu
 from notebook import Notebook
 from chart import Chart
 from configuration import Config
+from symbols import Symbol
 
 class MainFrame(object):
 
@@ -25,21 +26,24 @@ class MainFrame(object):
         # Add the other use interface stuff here.
         self.notebook = Notebook(self.master)
 
+        symb = Symbol('CRHC')
+        self.config.add_symbol(symb.name(), symb)
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
-        self.notebook.add_tab('CRHC', chart)
-        chart.create_chart('CRHC-max.csv', 'CRHC')
+        chart.create_chart(symb)
+        self.notebook.add_tab(symb.name(), chart)
 
+        symb = Symbol('DFIC')
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
-        self.notebook.add_tab('DFIC', chart)
-        chart.create_chart('DFIC-max.csv', 'DFIC')
+        chart.create_chart(symb)
+        self.notebook.add_tab(symb.name(), chart)
 
+        symb = Symbol('MSFT')
         chart = Chart(self.notebook,
                         panel_height=self.win_height, panel_width=self.win_width)
-        self.notebook.add_tab('MSFT', chart)
-        chart.create_chart('MSFT-max.csv', 'MSFT')
-        self.notebook.show_tab(0)
+        chart.create_chart(symb)
+        self.notebook.add_tab(symb.name(), chart)
 
     def run(self):
         self.master.mainloop()

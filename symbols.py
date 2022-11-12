@@ -9,12 +9,11 @@ from configuration import Config
 class Symbol(object):
 
     def __init__(self, name):
-        self.symbol = yf.Ticker(name)
-        #print(self.symbol.info)
-        self.history = self.symbol.history(period="max", interval="1m")
-        self.data = pd.DataFrame(self.history)
-
         self.config = Config.get_config()
+        self.symbol = yf.Ticker(name)
+        self.history = self.symbol.history(period=self.config.default_period(),
+                                            interval=self.config.default_interval())
+        self.data = pd.DataFrame(self.history)
 
     def name(self):
         return self.symbol.info['symbol']
