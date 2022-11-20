@@ -8,6 +8,25 @@
     If these dates are outside of the actual data, then bad things happen.
 '''
 
+### Start New code----------------------------------------------------
+### Constants  - These will be stored in configuration later
+SMA1 = 8
+SMA2 = 10
+SMA1_COLOR = 'blue'
+SMA2_COLOR = 'yellow'
+TICKER = 'TSLA'
+DATE_FROM = '2021-10-01'
+DATE_TO = '2022-11-10'
+#define width of candlestick elements
+CANDLE_WIDTH=0.4
+WIC_WIDTH =0.05
+UP_COLOR = 'green'
+DOWN_COLOR = 'red'
+import yfinance as yf  #used to pull live finance data from the internet
+import matplotlib.pyplot as plt
+
+### End New code----------------------------------------------------
+
 import pandas as pd
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
@@ -109,7 +128,7 @@ class Chart(tk.Frame):
         style.use("classic")
         # use this for configurations
         # print(style.available)
-
+        '''Old Code-----------------------------------------------------------------------
         data = symbol.history # pd.read_csv(chart)
         # isolate the data from the table
         ohlc = data.iloc[20:50]
@@ -119,21 +138,55 @@ class Chart(tk.Frame):
         ohlc['Date'] = ohlc['Date'].apply(mdates.date2num)
         ohlc = ohlc.astype(float)
         #print(ohlc)
+        '''
+        ### Start New Code -----------------------------------------------------------------------
+        # Get the data for the stock ticker, start date, and end date
+        data = yf.download([symbol.name()],DATE_FROM,DATE_TO)
+        df = pd.DataFrame(data)
+
+        #define rolling averages
+        df['sma1'] = df.Close.rolling(window=SMA1).mean()
+        df['sma2'] = df.Close.rolling(window=SMA2).mean()
+
+        #define up and down prices
+        up = df[df['Close']>=df['Open']]
+        down = df[df['Close']<df['Open']]
+
+        ### End New Code -----------------------------------------------------------------------
+
 
         # size of the figure is in inches.
         figure = Figure(figsize=(9.25,5.85), dpi=100)
         figure.suptitle(symbol.name())
         axis = figure.add_subplot(xlabel="Date", ylabel="Price")
 
+        ### Start New Code -----------------------------------------------------------------------        
+        #plot up candles
+        axis.bar(up.index,up.Close-up.Open,CANDLE_WIDTH,bottom=up.Open,color=UP_COLOR)
+        axis.bar(up.index,up.High-up.Close,WIC_WIDTH,bottom=up.Close,color=UP_COLOR)
+        axis.bar(up.index,up.Low-up.Open,WIC_WIDTH,bottom=up.Open,color=UP_COLOR)
+
+        #plot down candles
+        axis.bar(down.index,down.Close-down.Open,CANDLE_WIDTH,bottom=down.Open,color=DOWN_COLOR)
+        axis.bar(down.index,down.High-down.Open,WIC_WIDTH,bottom=down.Open,color=DOWN_COLOR)
+        axis.bar(down.index,down.Low-down.Close,WIC_WIDTH,bottom=down.Close,color=DOWN_COLOR)
+
+        #plot rolling averages
+        axis.plot(df.sma1,SMA1_COLOR,label='SMA1')
+        axis.plot(df.sma2,SMA2_COLOR,label='SMA2')
+        ### End New Code -----------------------------------------------------------------------
+
         canvas = FigureCanvasTkAgg(figure, self.ctl_frame)
         canvas.get_tk_widget().grid(row=0, column=0)
 
+        '''Old Code---------------------------------------------------------------------------
         candlestick_ohlc(axis, ohlc.values, width=0.6,
                          colorup='green', colordown='red', alpha=0.8)
 
         date_format = mdates.DateFormatter('%m-%d-%Y')
         axis.xaxis.set_major_formatter(date_format)
         figure.autofmt_xdate()
+        '''
 
         canvas.draw()
 
